@@ -26,3 +26,12 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
+task assembleDynamicCode(type: Jar) {
+    delete 'build/libs/dynamicCode.jar'
+    baseName 'dynamicCode'
+
+    from('build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/com/example/dynamicCmd')
+    exclude('CmdInvoker.class', 'DynamicCmdManager.class')
+
+    into('com/example/dynamicCmd/')
+}
